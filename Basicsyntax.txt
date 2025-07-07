@@ -1,0 +1,16 @@
+stages:
+    - build
+    - test
+    - deploy
+ 
+job1:
+    stage: build
+    script:
+        - echo "This is build stage from job1!"
+ 
+job2:
+    stage: test
+    script:
+        - echo "This is test stage from job2!"
+        
+//This is the basic syntax to write ci/cd pipeline 
