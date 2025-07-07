@@ -1,0 +1,19 @@
+stages:
+    - secret scanning
+
+secretscanning:
+    stage: secret scanning
+    before_script:
+        - wget https://github.com/gitleaks/gitleaks/releases/download/v8.27.2/gitleaks_8.27.2_linux_x64.tar.gz
+        - tar -xvf gitleaks_8.27.2_linux_x64.tar.gz
+        - mv gitleaks /usr/local/bin
+    script:
+        - gitleaks detect . --redact -f json -r gitleaks-report.json
+
+    artifacts:
+        when: always
+        paths:
+            - "gitleaks-report.json"
+
+//This is the ci/cd pipeline for finding secrets in your code 
+//The tool name is "Gitleaks"
