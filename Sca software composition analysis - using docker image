@@ -1,0 +1,17 @@
+stages:
+   - sca
+sca:
+    stage: sca
+    image:
+        name: aquasec/trivy
+        entrypoint: [""]
+    script:
+        - trivy repository . --scanners vuln -f json -o sca-scan-report.json 
+    artifacts:
+        when: always
+        paths:
+            - "sca-scan-report.json"
+
+
+//This one is using docker image from dockerhub 
+//choose the correct docker image 
