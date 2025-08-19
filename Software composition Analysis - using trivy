@@ -1,0 +1,17 @@
+stages:
+   - sca
+sca:
+    stage: sca
+    before_script: 
+        - apt-get update && apt-get install -y wget
+        - wget https://github.com/aquasecurity/trivy/releases/download/v0.47.0/trivy_0.47.0_Linux-64bit.deb
+        - dpkg -i trivy_0.47.0_Linux-64bit.deb
+    script:
+        - trivy repository . --scanners vuln -f json -o sca-scan-report.json 
+    artifacts:
+        when: always
+        paths:
+            - "sca-scan-report.json"
+
+// This is with trivy only 
+// install the tool and play with it 
