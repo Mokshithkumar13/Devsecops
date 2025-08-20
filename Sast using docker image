@@ -1,0 +1,16 @@
+stages:
+   - sast
+sast:
+    stage: sast
+    image:
+        name: snyk/snyk:python
+        entrypoint: [""]
+    script:
+        - pip install -r requirements.txt
+        - snyk auth 9c735641-bc52-4b0c-9eaf-e6f62bc60ae0
+        - snyk test --json-file-output=vuln.json
+    artifacts:
+        when: always
+        paths:
+            - "vuln.json"
+       
