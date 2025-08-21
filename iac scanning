@@ -1,0 +1,17 @@
+stages:
+   - iac scanning
+iac scanning:
+    stage: iac scanning
+    before_script: 
+        - apt-get update && apt-get install -y wget
+        - wget https://github.com/aquasecurity/trivy/releases/download/v0.47.0/trivy_0.47.0_Linux-64bit.deb
+        - dpkg -i trivy_0.47.0_Linux-64bit.deb
+    script:
+        - trivy config .  -f json -o iac-scan-report.json 
+    artifacts:
+        when: always
+        paths:
+            - "iac-scan-report.json"
+
+// It is done by trivy tool
+//it will scan the vuln in the .tf files and docker file 
