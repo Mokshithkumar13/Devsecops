@@ -1,0 +1,14 @@
+stages:
+    - mobsfscan 
+
+mobsfscan:
+    stage: mobsfscan
+    image: python:3.9
+    before_script:
+        - pip install mobsfscan
+    script:
+        - mobsfscan .
+
+// play the tool 
+// generate the report 
+//this is for mobile applications 
