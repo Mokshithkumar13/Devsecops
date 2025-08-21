@@ -1,0 +1,9 @@
+stages:
+    - dast
+dast:
+    stage: dast
+    image: docker:28.3.3-cli
+    services: 
+        - docker:28.3.3-dind
+    script:
+        - docker run zaproxy/zap-stable:latest zap-baseline.py -t https://demo.testfire.net/
